@@ -18,7 +18,7 @@ class CreateVehicleHistoryTable extends Migration
             $table->unsignedBigInteger('vehicle_id');
             $table->unsignedBigInteger('user_id');
             $table->datetime('start');
-            $table->datetime('stop');
+            $table->datetime('stop')->nullable();
             $table->timestamps();
 
             $table->foreign('vehicle_id')
