@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Vehicle extends Model
+class VehicleHistory extends Model
 {
     use HasFactory;
+    protected $table = 'vehicle_history';
 
     protected $fillable = [
-        'name'
+        'vehicle_id',
+        'user_id',
+        'start',
+        'end'
     ];
-
-    public function history(){
-        return $this->hasOne(VehicleHistory::class)->orderBy('id', 'DESC');
-    }
 }
