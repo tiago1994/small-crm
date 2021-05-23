@@ -16,4 +16,8 @@ class Vehicle extends Model
     public function history(){
         return $this->hasOne(VehicleHistory::class)->orderBy('id', 'DESC');
     }
+    
+    public function histories(){
+        return $this->hasMany(VehicleHistory::class)->orderBy('id', 'DESC');
+    }
 }
