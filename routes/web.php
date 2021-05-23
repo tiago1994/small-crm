@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,8 +26,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/vehicles', function () {
         return view('vehicles');
     })->name('vehicles');
-    
-    Route::get('/vehicles/{id}', function () {
-        return view('vehicles-history');
+
+    Route::get('/vehicles/{id}', function (Request $request) {
+        return view('vehicles-history', ['id' => $request->id]);
     })->name('vehicles-history');
 });
