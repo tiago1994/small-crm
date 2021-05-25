@@ -74,6 +74,7 @@
                                     <hr class="mt-2">
                                     <div class="w-full mt-3">
                                         <input type="text" class="w-full border border-gray-200 rounded shadow-sm" wire:model="name" placeholder="Digite o nome do veículo..."/>
+                                        @error('name') <span class="text-red-500">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
