@@ -13,6 +13,10 @@ class Vehicles extends Component
     public $vehicle_id;
     public $name;
 
+    protected $rules = [
+        'name' => 'required'
+    ];
+
     public function render()
     {
         $vehicles = Vehicle::with(['history'])->get();
@@ -44,6 +48,8 @@ class Vehicles extends Component
 
     public function save()
     {
+        $this->validate();
+        
         Vehicle::updateOrCreate(
             ['id' => $this->vehicle_id],
             ['name' => $this->name]
