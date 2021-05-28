@@ -15,8 +15,12 @@ class VehicleSeeder extends Seeder
     public function run()
     {
         $vehicles = ['Carro 1', 'Carro 2', 'Carro 3', 'Carro 4'];
-        foreach ($vehicles as $vehicle) {
-            Vehicle::create(['name' => $vehicle]);
+        $codes = ['PCU-1010', 'DLM-2121', 'RTZ-3012', 'MXC-1201'];
+        foreach ($vehicles as $i => $vehicle) {
+            Vehicle::create([
+                'name' => $vehicle,
+                'code' => $codes[$i]
+            ]);
         }
     }
 }
