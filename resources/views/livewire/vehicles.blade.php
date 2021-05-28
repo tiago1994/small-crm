@@ -22,6 +22,7 @@
                     </div>
                 </div>
                 <div class="text-2xl font-semibold mt-2">{{ $vehicle->name }}</div>
+                <div class="text-md font-semibold text-gray-400">{{ $vehicle->code }}</div>
             </div>
         @endforeach
 
@@ -75,6 +76,10 @@
                                     <div class="w-full mt-3">
                                         <input type="text" class="w-full border border-gray-200 rounded shadow-sm" wire:model="name" placeholder="Digite o nome do veículo..."/>
                                         @error('name') <span class="text-red-500">{{ $message }}</span> @enderror
+                                    </div>
+                                    <div class="w-full mt-3">
+                                        <input type="text" class="w-full border border-gray-200 rounded shadow-sm" wire:model="code" placeholder="Digite a placa do veículo..."/>
+                                        @error('code') <span class="text-red-500">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
