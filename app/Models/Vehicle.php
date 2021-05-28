@@ -10,7 +10,8 @@ class Vehicle extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name',
+        'code'
     ];
 
     public function history(){

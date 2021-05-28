@@ -12,6 +12,7 @@ class Vehicles extends Component
     public $delete_vehicle_id;
     public $vehicle_id;
     public $name;
+    public $code;
 
     protected $rules = [
         'name' => 'required'
@@ -52,7 +53,10 @@ class Vehicles extends Component
         
         Vehicle::updateOrCreate(
             ['id' => $this->vehicle_id],
-            ['name' => $this->name]
+            [   
+                'name' => $this->name,
+                'code' => $this->code,
+            ]
         );
 
         $this->cleanFields();
@@ -79,6 +83,7 @@ class Vehicles extends Component
     public function cleanFields()
     {
         $this->name = '';
+        $this->code = '';
         $this->delete_vehicle_id = '';
     }
 }
