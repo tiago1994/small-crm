@@ -2,63 +2,52 @@
 
 namespace App\Http\Livewire;
 
+use App\Services\VehicleService;
 use App\Models\Vehicle;
 use Livewire\Component;
 
 class Vehicles extends Component
 {
+    public Vehicle $vehicle;
     public $openModal = false;
     public $openDeleteModal = false;
-    public $delete_vehicle_id;
-    public $vehicle_id;
-    public $name;
-    public $code;
 
     protected $rules = [
-        'name' => 'required'
+        'vehicle.name' => 'required',
+        'vehicle.code' => 'string'
     ];
 
-    public function render()
+    public function mount()
     {
-        $vehicles = Vehicle::with(['history'])->get();
-        return view('livewire.vehicles', ['vehicles' => $vehicles]);
+        $this->vehicle = new Vehicle();
     }
 
-    public function stopVehicle($id)
+    public function render(VehicleService $vehicleService)
     {
-        Vehicle::find($id)->history()->update([
-            'stop' => now()
-        ]);
+        return view('livewire.vehicles', ['vehicles' => $vehicleService->getAll()]);
     }
 
-    public function playVehicle($id)
+    public function playVehicle(VehicleService $vehicleService, $id)
     {
-        Vehicle::find($id)->history()->create([
-            'user_id' => auth()->user()->id,
-            'start' => now()
-        ]);
+        $vehicleService->play($id, auth()->user()->id, now());
     }
 
-    public function edit($id)
+    public function stopVehicle(VehicleService $vehicleService, $id)
     {
-        $vehicle = Vehicle::find($id);
-        $this->vehicle_id = $vehicle->id;
-        $this->name = $vehicle->name;
+        $vehicleService->stop($id, now());
+    }
+
+
+    public function edit(VehicleService $vehicleService, $id)
+    {
         $this->toggleAddModal();
+        $this->vehicle = $vehicleService->find($id);
     }
 
-    public function save()
+    public function save(VehicleService $vehicleService)
     {
         $this->validate();
-        
-        Vehicle::updateOrCreate(
-            ['id' => $this->vehicle_id],
-            [   
-                'name' => $this->name,
-                'code' => $this->code,
-            ]
-        );
-
+        $vehicleService->save(['id' => $this->vehicle->id, 'name' => $this->vehicle->name, 'code' => $this->vehicle->code]);
         $this->cleanFields();
         $this->toggleAddModal();
     }
@@ -66,24 +55,23 @@ class Vehicles extends Component
     public function toggleAddModal()
     {
         $this->openModal = !$this->openModal;
+        $this->cleanFields();
     }
 
-    public function toggleDeleteModal($id = null)
+    public function toggleDeleteModal(VehicleService $vehicleService, $id = null)
     {
-        $this->delete_vehicle_id = $id;
+        $this->vehicle = $vehicleService->find($id);
         $this->openDeleteModal = !$this->openDeleteModal;
     }
 
-    public function delete()
+    public function delete(VehicleService $vehicleService)
     {
-        Vehicle::find($this->delete_vehicle_id)->delete();
+        $vehicleService->delete($this->vehicle->id);
         $this->openDeleteModal = !$this->openDeleteModal;
     }
 
     public function cleanFields()
     {
-        $this->name = '';
-        $this->code = '';
-        $this->delete_vehicle_id = '';
+        $this->vehicle = new Vehicle;
     }
 }

@@ -74,11 +74,11 @@
                                     <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Criar/Editar Veículo</h3>
                                     <hr class="mt-2">
                                     <div class="w-full mt-3">
-                                        <input type="text" class="w-full border border-gray-200 rounded shadow-sm" wire:model="name" placeholder="Digite o nome do veículo..."/>
+                                        <input type="text" class="w-full border border-gray-200 rounded shadow-sm" wire:model="vehicle.name" placeholder="Digite o nome do veículo..."/>
                                         @error('name') <span class="text-red-500">{{ $message }}</span> @enderror
                                     </div>
                                     <div class="w-full mt-3">
-                                        <input type="text" class="w-full border border-gray-200 rounded shadow-sm" wire:model="code" placeholder="Digite a placa do veículo..."/>
+                                        <input type="text" class="w-full border border-gray-200 rounded shadow-sm" wire:model="vehicle.code" placeholder="Digite a placa do veículo..."/>
                                         @error('code') <span class="text-red-500">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
