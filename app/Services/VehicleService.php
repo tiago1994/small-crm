@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Repositories\Eloquent\VehicleRepository;
-use Illuminate\Http\Request;
 
 class VehicleService
 {

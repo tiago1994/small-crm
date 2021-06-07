@@ -2,11 +2,10 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\User;
-use App\Models\Vehicle;
-use App\Models\VehicleHistory;
+use App\Services\VehicleService;
+use App\Services\VehicleHistoryService;
+use App\Services\UserService;
 use Livewire\Component;
-use Carbon\Carbon;
 
 class VehiclesHistory extends Component
 {
@@ -19,22 +18,12 @@ class VehiclesHistory extends Component
         $this->vehicle_id = $id;
     }
 
-    public function render()
+    public function render(VehicleService $vehicleService, VehicleHistoryService $vehicleHistoryService, UserService $userService)
     {
-        $vehicle = Vehicle::find($this->vehicle_id);
-        $users = User::all();
-        $histories = VehicleHistory::query();
-        $histories = $histories->where('vehicle_id', $this->vehicle_id);
-
-        if ($this->search_user) {
-            $histories = $histories->where('user_id', $this->search_user);
-        }
-
-        if ($this->search_date) {
-            $histories = $histories->whereDate('start', $this->search_date);
-        }
-
-        $histories = $histories->paginate(config('app.paginate_limit'));
-        return view('livewire.vehicles-history', ['histories' => $histories, 'vehicle' => $vehicle, 'users' => $users]);
+        return view('livewire.vehicles-history', [
+            'histories' => $vehicleHistoryService->filterList($this->vehicle_id, $this->search_user, $this->search_date),
+            'vehicle' => $vehicleService->find($this->vehicle_id),
+            'users' => $userService->getAll()
+        ]);
     }
 }
