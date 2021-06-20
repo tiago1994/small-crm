@@ -7,15 +7,27 @@
                 <div class="bg-white px-5 pt-5 pb-4">
                     <div>
                         <div class="mt-3 text-center sm:text-left">
-                            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Criar/Editar Veículo</h3>
+                            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Criar/Editar Cliente</h3>
                             <hr class="mt-2">
                             <div class="w-full mt-3">
-                                <input type="text" class="w-full border border-gray-200 rounded shadow-sm" wire:model="name" placeholder="Digite o nome do veículo..."/>
-                                @error('name') <span class="text-red-500">{{ $message }}</span> @enderror
+                                <input type="text" class="w-full border border-gray-200 rounded shadow-sm" wire:model.defer="client.name" placeholder="Digite o nome do cliente..." />
+                                @error('client.name') <span class="text-red-500">{{ $message }}</span> @enderror
                             </div>
                             <div class="w-full mt-3">
-                                <input type="text" class="w-full border border-gray-200 rounded shadow-sm" wire:model="code" placeholder="Digite a placa do veículo..."/>
-                                @error('code') <span class="text-red-500">{{ $message }}</span> @enderror
+                                <input type="text" class="w-full border border-gray-200 rounded shadow-sm" wire:model.defer="client.email" placeholder="Digite o email do cliente..." />
+                                @error('client.email') <span class="text-red-500">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="w-full mt-3">
+                                <input type="text" class="w-full border border-gray-200 rounded shadow-sm" wire:model.defer="client.cpf" placeholder="Digite o cpf do cliente..." />
+                                @error('client.cpf') <span class="text-red-500">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="w-full mt-3">
+                                <input type="text" class="w-full border border-gray-200 rounded shadow-sm" wire:model.defer="client.phone" placeholder="Digite o telefone do cliente..." />
+                                @error('client.phone') <span class="text-red-500">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="w-full mt-3">
+                                <input type="text" class="w-full border border-gray-200 rounded shadow-sm" wire:model.defer="client.whatsapp" placeholder="Digite o whatsapp do cliente..." />
+                                @error('client.whatsapp') <span class="text-red-500">{{ $message }}</span> @enderror
                             </div>
                         </div>
                     </div>

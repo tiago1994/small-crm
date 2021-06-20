@@ -15,7 +15,7 @@ class VehicleService
 
     public function getAll()
     {
-        return $this->vehicleRepository->getAll();
+        return $this->vehicleRepository->getAll()->paginate(config('app.paginate_limit'));
     }
 
     public function find($id)

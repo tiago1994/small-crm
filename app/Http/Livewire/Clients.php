@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Client;
+use App\Services\ClientService;
 use Livewire\Component;
 
 class Clients extends Component
@@ -11,10 +12,11 @@ class Clients extends Component
     public $openDeleteModal = false;
     public $delete_id;
 
-    public function render()
+    protected $listeners = ['updateClientsList'];
+
+    public function render(ClientService $clientService)
     {
-        $clients = Client::paginate(config('app.paginate_limit'));
-        return view('livewire.clients', ['clients' => $clients]);
+        return view('livewire.clients', ['clients' => $clientService->getAll()]);
     }
 
     public function toggleDeleteModal($id = null)
@@ -23,14 +25,18 @@ class Clients extends Component
         $this->openDeleteModal = !$this->openDeleteModal;
     }
 
-    public function delete()
+    public function delete(ClientService $clientService)
     {
-        Client::find($this->delete_id)->delete();
+        $clientService->delete($this->delete_id);
         $this->openDeleteModal = !$this->openDeleteModal;
     }
 
     public function toggleAddModal($id = null)
     {
-        $this->emit('openClientModal', ['id' => $id]);
+        $this->emit('openClientModal', $id);
+    }
+
+    public function updateClientsList()
+    {
     }
 }

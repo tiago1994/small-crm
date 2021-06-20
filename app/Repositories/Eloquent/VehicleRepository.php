@@ -16,7 +16,7 @@ class VehicleRepository
 
     public function getAll()
     {
-        return $this->vehicle->with('history')->get();
+        return $this->vehicle->with('history');
     }
 
     public function save($request)

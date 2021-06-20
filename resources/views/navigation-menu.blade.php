@@ -17,8 +17,18 @@
                     </x-jet-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('clients') }}" :active="request()->routeIs('clients')">
-                        {{ __('Clientes') }}
+                    <x-jet-nav-link href="{{ route('leads') }}" :active="request()->routeIs('leads')">
+                        {{ __('Leads') }}
+                    </x-jet-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('products') }}" :active="request()->routeIs('products')">
+                        {{ __('Produtos') }}
+                    </x-jet-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('offers') }}" :active="request()->routeIs('offers')">
+                        {{ __('Cotações') }}
                     </x-jet-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -92,22 +102,35 @@
                                     <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition">
                                         {{ Auth::user()->name }}
 
-                                        <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                        </svg>
+                                        <i class="la la-cog ml-1"></i>
                                     </button>
                                 </span>
                             @endif
                         </x-slot>
 
                         <x-slot name="content">
+                            <!-- Configuraçõs -->
+                            <div class="block px-4 py-2 text-xs text-gray-400">
+                                {{ __('Configurações') }}
+                            </div>
+
+                            <x-jet-dropdown-link href="{{ route('clients') }}">
+                                {{ __('Clientes') }}
+                            </x-jet-dropdown-link>
+                            <x-jet-dropdown-link href="{{ route('providers') }}">
+                                {{ __('Fornecedores') }}
+                            </x-jet-dropdown-link>
+                            <x-jet-dropdown-link href="{{ route('users') }}">
+                                {{ __('Usuários') }}
+                            </x-jet-dropdown-link>
+                            
                             <!-- Account Management -->
                             <div class="block px-4 py-2 text-xs text-gray-400">
-                                {{ __('Manage Account') }}
+                                {{ __('Sua conta') }}
                             </div>
 
                             <x-jet-dropdown-link href="{{ route('profile.show') }}">
-                                {{ __('Profile') }}
+                                {{ __('Perfil') }}
                             </x-jet-dropdown-link>
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
@@ -125,7 +148,7 @@
                                 <x-jet-dropdown-link href="{{ route('logout') }}"
                                          onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                    {{ __('Log Out') }}
+                                    {{ __('Sair') }}
                                 </x-jet-dropdown-link>
                             </form>
                         </x-slot>

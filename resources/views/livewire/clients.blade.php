@@ -41,7 +41,7 @@
                         <td class="px-6 py-4">{{ $client->phone }}</td>
                         <td class="px-6 py-4">{{ $client->whatsapp }}</td>
                         <td class="px-6 py-4 text-center">
-                            <i class="la la-pencil cursor-pointer"></i>
+                            <i class="la la-pencil cursor-pointer" wire:click="toggleAddModal({{$client->id}})"></i>
                             <i class="la la-trash cursor-pointer ml-1" wire:click="toggleDeleteModal({{$client->id}})"></i>
                         </td>
                     </tr>

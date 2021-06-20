@@ -34,4 +34,24 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/clients', function () {
         return view('clients');
     })->name('clients');
+    
+    Route::get('/leads', function () {
+        return view('leads');
+    })->name('leads');
+
+    Route::get('/products', function () {
+        return view('products');
+    })->name('products');
+
+    Route::get('/providers', function () {
+        return view('providers');
+    })->name('providers');
+
+    Route::get('/offers', function () {
+        return view('offers');
+    })->name('offers');
+
+    Route::get('/users', function () {
+        return view('users');
+    })->name('users');
 });
