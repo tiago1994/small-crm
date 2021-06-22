@@ -64,22 +64,20 @@
                                         @error('project.title') <span class="text-red-500">{{ $message }}</span> @enderror
                                     </div>
                                     <div class="col-span-4 mt-3">
-                                        <select class="w-full border border-gray-200 rounded shadow-sm">
-                                            <option value="">Selecionar a cidade...</option>
-                                            <option value="1">Cidade 1</option>
-                                            <option value="2">Cidade 2</option>
-                                            <option value="3">Cidade 3</option>
-                                            <option value="4">Cidade 4</option>
+                                        <select class="w-full border border-gray-200 rounded shadow-sm" wire:model="state_id">
+                                            <option value="">Selecionar o estado...</option>
+                                            @foreach($states as $state)
+                                                <option value="{{ $state['id'] }}">{{ $state['name'] }}</option>    
+                                            @endforeach
                                         </select>
                                         @error('project.title') <span class="text-red-500">{{ $message }}</span> @enderror
                                     </div>
                                     <div class="col-span-4 mt-3">
-                                        <select class="w-full border border-gray-200 rounded shadow-sm">
-                                            <option value="">Selecionar o estado...</option>
-                                            <option value="1">Estado 1</option>
-                                            <option value="2">Estado 2</option>
-                                            <option value="3">Estado 3</option>
-                                            <option value="4">Estado 4</option>
+                                        <select class="w-full border border-gray-200 rounded shadow-sm" wire:model="city_id">
+                                            <option value="">Selecionar a cidade...</option>
+                                            @foreach($cities as $city)
+                                                <option value="{{ $city['id'] }}">{{ $city['name'] }}</option>    
+                                            @endforeach
                                         </select>
                                         @error('project.title') <span class="text-red-500">{{ $message }}</span> @enderror
                                     </div>

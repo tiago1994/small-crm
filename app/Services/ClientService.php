@@ -15,6 +15,11 @@ class ClientService
 
     public function getAll()
     {
+        return $this->clientRepository->getAll()->get();
+    }
+    
+    public function getAllPaginate()
+    {
         return $this->clientRepository->getAll()->paginate(config('app.paginate_limit'));
     }
 

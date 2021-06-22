@@ -2,12 +2,12 @@
 
 namespace App\Http\Livewire\Components;
 
+use App\Services\StateService;
+use App\Services\StepService;
+use App\Services\ClientService;
+use App\Services\UserService;
 use Livewire\Component;
 use App\Models\Project;
-use App\Models\User;
-use App\Models\Client;
-use App\Models\Step;
-
 class LeadModal extends Component
 {
     public $open = false;
@@ -16,10 +16,17 @@ class LeadModal extends Component
     public $clients;
     public $steps;
 
-    public function mount(){
-        $this->users = User::all();
-        $this->clients = Client::all();
-        $this->steps = Step::all();
+    public $states = [];
+    public $state_id = "";
+    public $cities = [];
+    public $city_id = "";
+
+    public function mount(StateService $stateService, StepService $stepService, ClientService $clientService, UserService $userService)
+    {
+        $this->users = $userService->getAll();
+        $this->clients = $clientService->getAll();
+        $this->steps = $stepService->getAll();
+        $this->states = $stateService->getAll();
     }
 
     public function render()
@@ -27,8 +34,8 @@ class LeadModal extends Component
         return view('livewire.components.lead-modal');
     }
 
-    public function save(){
-
+    public function save()
+    {
     }
 
     public function openModal()
@@ -39,5 +46,16 @@ class LeadModal extends Component
     public function closeModal()
     {
         $this->open = false;
+    }
+
+    public function updatedStateId()
+    {
+        if (empty($this->state_id)) {
+            $this->city_id = "";
+            $this->cities = [];
+            return;
+        }
+
+        $this->cities = $this->states->firstWhere('id', $this->state_id)['cities'];
     }
 }

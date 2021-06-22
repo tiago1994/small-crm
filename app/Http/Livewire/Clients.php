@@ -16,7 +16,7 @@ class Clients extends Component
 
     public function render(ClientService $clientService)
     {
-        return view('livewire.clients', ['clients' => $clientService->getAll()]);
+        return view('livewire.clients', ['clients' => $clientService->getAllPaginate()]);
     }
 
     public function toggleDeleteModal($id = null)
