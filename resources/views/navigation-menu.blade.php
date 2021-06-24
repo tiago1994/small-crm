@@ -22,8 +22,8 @@
                     </x-jet-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('products') }}" :active="request()->routeIs('products')">
-                        {{ __('Produtos') }}
+                    <x-jet-nav-link href="{{ route('clients') }}" :active="request()->routeIs('clients')">
+                        {{ __('Clientes') }}
                     </x-jet-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -113,12 +113,12 @@
                             <div class="block px-4 py-2 text-xs text-gray-400">
                                 {{ __('Configurações') }}
                             </div>
-
-                            <x-jet-dropdown-link href="{{ route('clients') }}">
-                                {{ __('Clientes') }}
-                            </x-jet-dropdown-link>
+                            
                             <x-jet-dropdown-link href="{{ route('providers') }}">
                                 {{ __('Fornecedores') }}
+                            </x-jet-dropdown-link>
+                            <x-jet-dropdown-link href="{{ route('products') }}">
+                                {{ __('Produtos') }}
                             </x-jet-dropdown-link>
                             <x-jet-dropdown-link href="{{ route('users') }}">
                                 {{ __('Usuários') }}

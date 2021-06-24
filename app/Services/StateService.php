@@ -6,15 +6,15 @@ use App\Repositories\Eloquent\StateRepository;
 
 class StateService
 {
-    protected $stateRepository;
+    protected $repository;
 
-    public function __construct(StateRepository $stateRepository)
+    public function __construct(StateRepository $repository)
     {
-        $this->stateRepository = $stateRepository;
+        $this->repository = $repository;
     }
 
     public function getAll()
     {
-        return $this->stateRepository->getAll();
+        return $this->repository->getAll();
     }
 }

@@ -22,32 +22,32 @@ class Vehicles extends Component
         $this->vehicle = new Vehicle();
     }
 
-    public function render(VehicleService $vehicleService)
+    public function render(VehicleService $service)
     {
-        return view('livewire.vehicles', ['vehicles' => $vehicleService->getAll()]);
+        return view('livewire.vehicles', ['vehicles' => $service->getAll()]);
     }
 
-    public function playVehicle(VehicleService $vehicleService, $id)
+    public function playVehicle(VehicleService $service, $id)
     {
-        $vehicleService->play($id, auth()->user()->id, now());
+        $service->play($id, auth()->user()->id, now());
     }
 
-    public function stopVehicle(VehicleService $vehicleService, $id)
+    public function stopVehicle(VehicleService $service, $id)
     {
-        $vehicleService->stop($id, now());
+        $service->stop($id, now());
     }
 
 
-    public function edit(VehicleService $vehicleService, $id)
+    public function edit(VehicleService $service, $id)
     {
         $this->toggleAddModal();
-        $this->vehicle = $vehicleService->find($id);
+        $this->vehicle = $service->find($id);
     }
 
-    public function save(VehicleService $vehicleService)
+    public function save(VehicleService $service)
     {
         $this->validate();
-        $vehicleService->save(['id' => $this->vehicle->id, 'name' => $this->vehicle->name, 'code' => $this->vehicle->code]);
+        $service->save(['id' => $this->vehicle->id, 'name' => $this->vehicle->name, 'code' => $this->vehicle->code]);
         $this->cleanFields();
         $this->toggleAddModal();
     }
@@ -58,15 +58,15 @@ class Vehicles extends Component
         $this->cleanFields();
     }
 
-    public function toggleDeleteModal(VehicleService $vehicleService, $id = null)
+    public function toggleDeleteModal(VehicleService $service, $id = null)
     {
-        $this->vehicle = $vehicleService->find($id);
+        $this->vehicle = $service->find($id);
         $this->openDeleteModal = !$this->openDeleteModal;
     }
 
-    public function delete(VehicleService $vehicleService)
+    public function delete(VehicleService $service)
     {
-        $vehicleService->delete($this->vehicle->id);
+        $service->delete($this->vehicle->id);
         $this->openDeleteModal = !$this->openDeleteModal;
     }
 

@@ -6,15 +6,20 @@ use App\Repositories\Eloquent\StepRepository;
 
 class StepService
 {
-    protected $stepRepository;
+    protected $repository;
 
-    public function __construct(StepRepository $stepRepository)
+    public function __construct(StepRepository $repository)
     {
-        $this->stepRepository = $stepRepository;
+        $this->repository = $repository;
     }
 
     public function getAll()
     {
-        return $this->stepRepository->getAll()->get();
+        return $this->repository->getAll()->get();
+    }
+    
+    public function getAvailable()
+    {
+        return $this->repository->getAll()->where('visible', 1)->get();
     }
 }

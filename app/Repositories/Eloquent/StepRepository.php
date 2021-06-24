@@ -6,15 +6,15 @@ use App\Models\Step;
 
 class StepRepository
 {
-    protected $step;
+    protected $model;
 
-    public function __construct(Step $step)
+    public function __construct(Step $model)
     {
-        $this->step = $step;
+        $this->model = $model;
     }
 
     public function getAll()
     {
-        return $this->step;
+        return $this->model->with('projects');
     }
 }

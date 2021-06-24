@@ -6,11 +6,11 @@ use App\Models\State;
 
 class StateRepository extends Repository
 {
-    protected $state;
+    protected $model;
 
-    public function __construct(State $state)
+    public function __construct(State $model)
     {
-        $this->state = $state;
+        $this->model = $model;
     }
 
     public function getAll()
@@ -19,6 +19,6 @@ class StateRepository extends Repository
         if ($this->checkCache($cache_name)) {
             return $this->fromCache($cache_name);
         }
-        return $this->storeCache($cache_name, $this->state->with('cities'));
+        return $this->storeCache($cache_name, $this->model->with('cities'));
     }
 }

@@ -1,10 +1,5 @@
 <div>
     <div class="grid grid-cols-3 gap-4">
-        <div class="text-right col-span-3">
-            <div>
-                <button class="bg-green-500 py-2 px-4 text-white rounded-lg focus:outline-none" wire:click="toggleAddModal()">Adicionar</button>
-            </div>
-        </div>
         @foreach ($vehicles as $loop => $vehicle)
         <div class="col-span-1 p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
             <div class="flex">
@@ -62,6 +57,11 @@
         </div>
         @endif
 
+        <div class="fixed right-5 bottom-5">
+            <div class="bg-white h-10 w-10 flex items-center justify-center shadow-xl rounded-full cursor-pointer" wire:click="toggleAddModal()">
+                <i class="la la-plus"></i>
+            </div>
+        </div>
         @if($openModal)
         <div class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
             <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">

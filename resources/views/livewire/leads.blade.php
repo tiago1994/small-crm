@@ -1,24 +1,23 @@
 <div>
-    <style>
-    </style>
-
     <div class="flex gap-2 overflow-x-auto">
-        @for($i = 0; $i < 4; $i++)
-            <div class="w-80 bg-white p-2 h-96 flex flex-col border-b border-gray-200 shadow-sm sm:rounded-lg">
-                <div class="mb-1 font-bold">Etapa 1</div>
-                <div class="bg-gray-100 h-full p-2 border-b border-gray-200 shadow-sm sm:rounded-lg">
+        @foreach($steps as $step)
+        <div class="w-80 bg-white p-2 h-full-leads flex flex-col border-b border-gray-200 shadow-sm sm:rounded-lg">
+            <div class="mb-1 font-bold">{{$step->name}}</div>
+            <div class="bg-gray-100 h-full p-2 border-b border-gray-200 shadow-sm sm:rounded-lg overflow-y-auto">
 
-                    <div class="bg-white p-2 border-b border-gray-200 shadow-sm sm:rounded-lg cursor-pointer">
-                        <div class="font-bold text-sm">Tiago Matos</div>
-                        <div class="text-xs">Orçamento para porta de vidro 5/4 utilizando o vidro x.</div>
-                        <div class="flex justify-end mt-1">
-                            <img src="{{ auth()->user()->profile_photo_url }}" alt="{{ auth()->user()->name }}" title="{{ auth()->user()->name }}" class="rounded-full h-5 w-5 object-cover">
-                        </div>
+                @foreach($step->projects as $project)
+                <div class="bg-white p-2 border-b border-gray-200 shadow-sm sm:rounded-lg cursor-pointer mb-2">
+                    <div class="font-bold text-sm">{{ $project->client->name }}</div>
+                    <div class="text-xs">{{ $project->title }}</div>
+                    <div class="flex justify-end mt-1">
+                        <img src="{{ $project->user->profile_photo_url }}" alt="{{ $project->user->name }}" title="{{ $project->user->name }}" class="rounded-full h-5 w-5 object-cover">
                     </div>
-
                 </div>
+                @endforeach
+
             </div>
-        @endfor
+        </div>
+        @endforeach
     </div>
 
     @livewire('components.lead-modal')

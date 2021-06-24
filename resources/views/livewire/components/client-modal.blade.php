@@ -14,7 +14,7 @@
                                 @error('client.name') <span class="text-red-500">{{ $message }}</span> @enderror
                             </div>
                             <div class="w-full mt-3">
-                                <input type="text" class="w-full border border-gray-200 rounded shadow-sm" wire:model.defer="client.email" placeholder="Digite o email do cliente..." />
+                                <input type="email" class="w-full border border-gray-200 rounded shadow-sm" wire:model.defer="client.email" placeholder="Digite o email do cliente..." />
                                 @error('client.email') <span class="text-red-500">{{ $message }}</span> @enderror
                             </div>
                             <div class="w-full mt-3">

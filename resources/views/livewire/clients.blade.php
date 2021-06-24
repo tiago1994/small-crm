@@ -1,13 +1,5 @@
 <div>
     <div class="grid grid-cols-3 gap-4">
-        <div class="text-right col-span-3">
-            <div>
-                <button class="bg-green-500 py-2 px-4 text-white rounded-lg focus:outline-none" wire:click="toggleAddModal()">Adicionar</button>
-            </div>
-        </div>
-
-        @livewire('components.client-modal')
-
         <div class="col-span-3">
             <table class="w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden mb-2">
                 <thead class="bg-gray-50">
@@ -27,7 +19,7 @@
                         <th class="font-semibold text-sm uppercase px-6 py-4">
                             Whatsapp
                         </th>
-                        <th class="font-semibold text-sm uppercase px-6 py-4">
+                        <th class="text-center font-semibold text-sm uppercase px-6 py-4">
                             Opções
                         </th>
                     </tr>
@@ -40,7 +32,7 @@
                         <td class="px-6 py-4">{{ $client->cpf }}</td>
                         <td class="px-6 py-4">{{ $client->phone }}</td>
                         <td class="px-6 py-4">{{ $client->whatsapp }}</td>
-                        <td class="px-6 py-4 text-center">
+                        <td class="px-6 py-4 text-center w-32">
                             <i class="la la-pencil cursor-pointer" wire:click="toggleAddModal({{$client->id}})"></i>
                             <i class="la la-trash cursor-pointer ml-1" wire:click="toggleDeleteModal({{$client->id}})"></i>
                         </td>
@@ -87,4 +79,11 @@
         </div>
         @endif
     </div>
+
+    <div class="fixed right-5 bottom-5">
+        <div class="bg-white h-10 w-10 flex items-center justify-center shadow-xl rounded-full cursor-pointer" wire:click="toggleAddModal()">
+            <i class="la la-plus"></i>
+        </div>
+    </div>
+    @livewire('components.client-modal')
 </div>

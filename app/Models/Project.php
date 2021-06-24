@@ -12,14 +12,23 @@ class Project extends Model
     protected $fillable = [
         'user_id',
         'client_id',
+        'city_id',
+        'state_id',
         'step_id',
         'title',
+        'description',
         'cep',
         'address',
         'number',
         'neighborhood',
-        'city',
-        'state',
         'value'
     ];
+
+    public function client(){
+        return $this->hasOne(Client::class, 'id', 'client_id');
+    }
+    
+    public function user(){
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 }

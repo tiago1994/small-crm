@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Client;
 use App\Services\ClientService;
 use Livewire\Component;
 
@@ -14,9 +13,9 @@ class Clients extends Component
 
     protected $listeners = ['updateClientsList'];
 
-    public function render(ClientService $clientService)
+    public function render(ClientService $service)
     {
-        return view('livewire.clients', ['clients' => $clientService->getAllPaginate()]);
+        return view('livewire.clients', ['clients' => $service->getAllPaginate()]);
     }
 
     public function toggleDeleteModal($id = null)
@@ -25,9 +24,9 @@ class Clients extends Component
         $this->openDeleteModal = !$this->openDeleteModal;
     }
 
-    public function delete(ClientService $clientService)
+    public function delete(ClientService $service)
     {
-        $clientService->delete($this->delete_id);
+        $service->delete($this->delete_id);
         $this->openDeleteModal = !$this->openDeleteModal;
     }
 

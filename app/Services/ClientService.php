@@ -6,35 +6,35 @@ use App\Repositories\Eloquent\ClientRepository;
 
 class ClientService
 {
-    protected $clientRepository;
+    protected $repository;
 
-    public function __construct(ClientRepository $clientRepository)
+    public function __construct(ClientRepository $repository)
     {
-        $this->clientRepository = $clientRepository;
+        $this->repository = $repository;
     }
 
     public function getAll()
     {
-        return $this->clientRepository->getAll()->get();
+        return $this->repository->getAll()->get();
     }
     
     public function getAllPaginate()
     {
-        return $this->clientRepository->getAll()->paginate(config('app.paginate_limit'));
+        return $this->repository->getAll()->paginate(config('app.paginate_limit'));
     }
 
     public function find($id)
     {
-        return $this->clientRepository->find($id);
+        return $this->repository->find($id);
     }
 
     public function delete($id)
     {
-        return $this->clientRepository->delete($id);
+        return $this->repository->delete($id);
     }
 
     public function save($request)
     {
-        return $this->clientRepository->save($request);
+        return $this->repository->save($request);
     }
 }

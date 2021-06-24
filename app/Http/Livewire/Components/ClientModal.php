@@ -26,10 +26,10 @@ class ClientModal extends Component
         return view('livewire.components.client-modal');
     }
 
-    public function save(ClientService $clientService)
+    public function save(ClientService $service)
     {
         $this->validate();
-        $clientService->save([
+        $service->save([
             'id' => $this->client->id, 
             'name' => $this->client->name, 
             'email' => $this->client->email,
@@ -53,11 +53,11 @@ class ClientModal extends Component
         $this->client = new Client;
     }
 
-    public function openClientModal(ClientService $clientService, $id = null)
+    public function openClientModal(ClientService $service, $id = null)
     {
         $this->open = true;
         if($id != null){
-            $this->client = $clientService->find($id);
+            $this->client = $service->find($id);
         }else{
             $this->client = new Client;
         }

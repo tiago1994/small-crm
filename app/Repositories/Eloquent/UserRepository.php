@@ -6,20 +6,36 @@ use App\Models\User;
 
 class UserRepository
 {
-    protected $user;
+    protected $model;
 
-    public function __construct(User $user)
+    public function __construct(User $model)
     {
-        $this->user = $user;
+        $this->model = $model;
     }
 
     public function getAll()
     {
-        return $this->user->all();
+        return $this->model;
+    }
+
+    public function save($request)
+    {
+        return $this->model->updateOrCreate(
+            ['id' => $request['id']],
+            [
+                'name' => $request['name'], 
+                'email' => $request['email']
+            ]
+        );
     }
 
     public function find($id)
     {
-        return $this->user->find($id);
+        return $this->model->find($id);
+    }
+
+    public function delete($id)
+    {
+        return $this->model->find($id)->delete();
     }
 }

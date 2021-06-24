@@ -6,31 +6,31 @@ use App\Models\Client;
 
 class ClientRepository
 {
-    protected $client;
+    protected $model;
 
-    public function __construct(Client $client)
+    public function __construct(Client $model)
     {
-        $this->client = $client;
+        $this->model = $model;
     }
 
     public function getAll()
     {
-        return $this->client->query();
+        return $this->model->query();
     }
 
     public function find($id)
     {
-        return $this->client->find($id);
+        return $this->model->find($id);
     }
 
     public function delete($id)
     {
-        return $this->client->find($id)->delete();
+        return $this->model->find($id)->delete();
     }
 
     public function save($request)
     {
-        return $this->client->updateOrCreate(
+        return $this->model->updateOrCreate(
             ['id' => $request['id']],
             [
                 'name' => $request['name'],

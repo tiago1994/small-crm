@@ -6,15 +6,15 @@ use App\Repositories\Eloquent\VehicleHistoryRepository;
 
 class VehicleHistoryService
 {
-    protected $vehicleHistoryRepository;
+    protected $repository;
 
-    public function __construct(VehicleHistoryRepository $vehicleHistoryRepository)
+    public function __construct(VehicleHistoryRepository $repository)
     {
-        $this->vehicleHistoryRepository = $vehicleHistoryRepository;
+        $this->repository = $repository;
     }
 
     public function filterList($vehicle_id, $search_user, $search_date)
     {
-        return $this->vehicleHistoryRepository->filterList($vehicle_id, $search_user, $search_date);
+        return $this->repository->filterList($vehicle_id, $search_user, $search_date);
     }
 }
