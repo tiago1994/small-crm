@@ -9,12 +9,23 @@ class Leads extends Component
 {
     public $steps = [];
 
-    public function mount(StepService $service){
+    protected $listeners = ['updateStepList'];
+
+    public function mount(StepService $service)
+    {
         $this->steps = $service->getAvailable();
     }
 
     public function render()
     {
         return view('livewire.leads');
+    }
+
+    public function updateStepList(StepService $service){
+        $this->steps = $service->getAvailable();
+    }
+
+    public function openModal($id){
+        $this->emit('openLeadModal', $id);
     }
 }

@@ -2,13 +2,13 @@
 
 namespace App\Services;
 
-use App\Repositories\Eloquent\ProductRepository;
+use App\Repositories\Eloquent\OfferRepository;
 
-class ProductService
+class OfferService
 {
     protected $repository;
 
-    public function __construct(ProductRepository $repository)
+    public function __construct(OfferRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -17,7 +17,7 @@ class ProductService
     {
         return $this->repository->getAll()->get();
     }
-    
+
     public function getAllPaginate()
     {
         return $this->repository->getAll()->paginate(config('app.paginate_limit'));

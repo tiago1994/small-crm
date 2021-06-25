@@ -15,6 +15,11 @@ class ProviderService
 
     public function getAll()
     {
+        return $this->repository->getAll()->get();
+    }
+
+    public function getAllPaginate()
+    {
         return $this->repository->getAll()->paginate(config('app.paginate_limit'));
     }
 

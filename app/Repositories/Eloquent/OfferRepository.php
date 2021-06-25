@@ -2,13 +2,14 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Models\Product;
+use App\Models\Offer;
 
-class ProductRepository
+class OfferRepository
 {
+
     protected $model;
 
-    public function __construct(Product $model)
+    public function __construct(Offer $model)
     {
         $this->model = $model;
     }
@@ -33,7 +34,8 @@ class ProductRepository
         return $this->model->updateOrCreate(
             ['id' => $request['id']],
             [
-                'name' => $request['name']
+                'title' => $request['title'],
+                'file' => $request['file']
             ]
         );
     }

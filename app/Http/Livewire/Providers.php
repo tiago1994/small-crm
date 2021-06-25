@@ -15,7 +15,7 @@ class Providers extends Component
 
     public function render(ProviderService $service)
     {
-        return view('livewire.providers', ['providers' => $service->getAll()]);
+        return view('livewire.providers', ['providers' => $service->getAllPaginate()]);
     }
 
     public function toggleDeleteModal($id = null)

@@ -1,6 +1,6 @@
 <div>
     <div class="absolute right-5 bottom-5">
-        <div class="bg-white h-10 w-10 flex items-center justify-center shadow-xl rounded-full cursor-pointer" wire:click="openModal()">
+        <div class="bg-white h-10 w-10 flex items-center justify-center shadow-xl rounded-full cursor-pointer" wire:click="openLeadModal()">
             <i class="la la-plus"></i>
         </div>
     </div>
@@ -17,7 +17,7 @@
                                 <hr class="mt-2">
                                 <div class="grid grid-cols-12 gap-3">
                                     <div class="col-span-4 mt-3">
-                                        <select class="w-full border border-gray-200 rounded shadow-sm">
+                                        <select class="w-full border border-gray-200 rounded shadow-sm" wire:model.defer="project.step_id">
                                             <option value="">Selecionar etapa...</option>
                                             @foreach($steps as $step)
                                                 <option value="{{ $step->id }}">{{ $step->name }}</option>
@@ -26,7 +26,7 @@
                                         @error('project.step_id') <span class="text-red-500">{{ $message }}</span> @enderror
                                     </div>
                                     <div class="col-span-4 mt-3">
-                                        <select class="w-full border border-gray-200 rounded shadow-sm">
+                                        <select class="w-full border border-gray-200 rounded shadow-sm" wire:model.defer="project.client_id">
                                             <option value="">Selecionar responsavel...</option>
                                             @foreach($users as $user)
                                                 <option value="{{ $user->id }}">{{ $user->name }}</option>
@@ -35,7 +35,7 @@
                                         @error('project.client_id') <span class="text-red-500">{{ $message }}</span> @enderror
                                     </div>
                                     <div class="col-span-4 mt-3">
-                                        <select class="w-full border border-gray-200 rounded shadow-sm">
+                                        <select class="w-full border border-gray-200 rounded shadow-sm" wire:model.defer="project.user_id">
                                             <option value="">Selecionar cliente...</option>
                                             @foreach($clients as $client)
                                                 <option value="{{ $client->id }}">{{ $client->name }}</option>
@@ -45,23 +45,9 @@
                                     </div>
                                 </div>
                                 <div class="grid grid-cols-12 gap-3">
-                                    <div class="col-span-3 mt-3">
-                                        <input type="text" class="w-full border border-gray-200 rounded shadow-sm" placeholder="Digite o cep do projeto..." />
-                                        @error('project.title') <span class="text-red-500">{{ $message }}</span> @enderror
-                                    </div>
-                                    <div class="col-span-6 mt-3">
-                                        <input type="text" class="w-full border border-gray-200 rounded shadow-sm" placeholder="Digite o endereço do projeto..." />
-                                        @error('project.title') <span class="text-red-500">{{ $message }}</span> @enderror
-                                    </div>
-                                    <div class="col-span-3 mt-3">
-                                        <input type="text" class="w-full border border-gray-200 rounded shadow-sm" placeholder="Digite o número do projeto..." />
-                                        @error('project.title') <span class="text-red-500">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                                <div class="grid grid-cols-12 gap-3">
                                     <div class="col-span-4 mt-3">
-                                        <input type="text" class="w-full border border-gray-200 rounded shadow-sm" placeholder="Digite o bairro do projeto..." />
-                                        @error('project.title') <span class="text-red-500">{{ $message }}</span> @enderror
+                                        <input type="text" class="w-full border border-gray-200 rounded shadow-sm" placeholder="Digite o cep do projeto..." wire:model="project.cep" />
+                                        @error('project.cep') <span class="text-red-500">{{ $message }}</span> @enderror
                                     </div>
                                     <div class="col-span-4 mt-3">
                                         <select class="w-full border border-gray-200 rounded shadow-sm" wire:model="state_id">
@@ -70,7 +56,7 @@
                                                 <option value="{{ $state['id'] }}">{{ $state['name'] }}</option>    
                                             @endforeach
                                         </select>
-                                        @error('project.title') <span class="text-red-500">{{ $message }}</span> @enderror
+                                        @error('project.state_id') <span class="text-red-500">{{ $message }}</span> @enderror
                                     </div>
                                     <div class="col-span-4 mt-3">
                                         <select class="w-full border border-gray-200 rounded shadow-sm" wire:model="city_id">
@@ -79,15 +65,35 @@
                                                 <option value="{{ $city['id'] }}">{{ $city['name'] }}</option>    
                                             @endforeach
                                         </select>
-                                        @error('project.title') <span class="text-red-500">{{ $message }}</span> @enderror
+                                        @error('project.city_id') <span class="text-red-500">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-12 gap-3">
+                                    <div class="col-span-6 mt-3">
+                                        <input type="text" class="w-full border border-gray-200 rounded shadow-sm" placeholder="Digite o endereço do projeto..." wire:model.defer="project.address" />
+                                        @error('project.address') <span class="text-red-500">{{ $message }}</span> @enderror
+                                    </div>
+                                    <div class="col-span-3 mt-3">
+                                        <input type="text" class="w-full border border-gray-200 rounded shadow-sm" placeholder="Digite o número do projeto..." wire:model.defer="project.number" />
+                                        @error('project.number') <span class="text-red-500">{{ $message }}</span> @enderror
+                                    </div>
+                                    <div class="col-span-3 mt-3">
+                                        <input type="text" class="w-full border border-gray-200 rounded shadow-sm" placeholder="Digite o bairro do projeto..." wire:model.defer="project.neighborhood" />
+                                        @error('project.neighborhood') <span class="text-red-500">{{ $message }}</span> @enderror
                                     </div>
                                 </div>  
-                                <div class="w-full mt-3">
-                                    <input type="text" class="w-full border border-gray-200 rounded shadow-sm" placeholder="Digite o título do projeto..." />
-                                    @error('project.title') <span class="text-red-500">{{ $message }}</span> @enderror
+                                <div class="grid grid-cols-12 gap-3">
+                                    <div class="col-span-6 mt-3">
+                                        <input type="text" class="w-full border border-gray-200 rounded shadow-sm" placeholder="Digite o título do projeto..." wire:model.defer="project.title" />
+                                        @error('project.title') <span class="text-red-500">{{ $message }}</span> @enderror
+                                    </div>
+                                    <div class="col-span-6 mt-3">
+                                        <input type="text" class="w-full border border-gray-200 rounded shadow-sm" placeholder="Digite o valor do projeto..." wire:model.defer="project.value" />
+                                        @error('project.value') <span class="text-red-500">{{ $message }}</span> @enderror
+                                    </div>
                                 </div>
                                 <div class="w-full mt-3">
-                                    <textarea class="w-full border border-gray-200 rounded shadow-sm" placeholder="Digite os detalhes do projeto..." rows="4"></textarea>
+                                    <textarea class="w-full border border-gray-200 rounded shadow-sm" placeholder="Digite os detalhes do projeto..." rows="4" wire:model.defer="project.description"></textarea>
                                     @error('project.description') <span class="text-red-500">{{ $message }}</span> @enderror
                                 </div>
                             </div>

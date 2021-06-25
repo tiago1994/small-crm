@@ -6,3 +6,6 @@
 .h-full-leads{
     height: calc(100vh - 240px);
 }
+.opacity-card{
+    opacity: .3;
+}

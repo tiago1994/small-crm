@@ -18,7 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(StepSeeder::class);
         $this->call(StateSeeder::class);
         $this->call(CitySeeder::class);
-        $this->call(ProductSeeder::class);
         $this->call(ProviderSeeder::class);
         $this->call(ClientSeeder::class);
         $this->call(ProjectSeeder::class);

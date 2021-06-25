@@ -6,6 +6,7 @@ use App\Services\StateService;
 use App\Services\StepService;
 use App\Services\ClientService;
 use App\Services\UserService;
+use App\Services\ProjectService;
 use Livewire\Component;
 use App\Models\Project;
 class LeadModal extends Component
@@ -21,6 +22,23 @@ class LeadModal extends Component
     public $cities = [];
     public $city_id = "";
 
+    protected $rules = [
+        'project.user_id' => 'required',
+        'project.client_id' => 'required',
+        'city_id' => 'required',
+        'state_id' => 'required',
+        'project.step_id' => 'required',
+        'project.title' => 'required',
+        'project.description' => 'required',
+        'project.cep' => 'required',
+        'project.address' => 'required',
+        'project.number' => 'required',
+        'project.neighborhood' => 'required',
+        'project.value' => 'sometimes'
+    ];
+
+    protected $listeners = ['openLeadModal'];
+
     public function mount(StateService $stateService, StepService $stepService, ClientService $clientService, UserService $userService)
     {
         $this->users = $userService->getAll();
@@ -34,13 +52,40 @@ class LeadModal extends Component
         return view('livewire.components.lead-modal');
     }
 
-    public function save()
+    public function save(ProjectService $service)
     {
+        $this->validate();
+        $service->save([
+            'id' => $this->project->id,
+            'user_id' => $this->project->user_id, 
+            'client_id' => $this->project->client_id, 
+            'city_id' => $this->city_id, 
+            'state_id' => $this->state_id, 
+            'step_id' => $this->project->step_id, 
+            'title' => $this->project->title, 
+            'description' => $this->project->description, 
+            'cep' => $this->project->cep, 
+            'address' => $this->project->address, 
+            'number' => $this->project->number, 
+            'neighborhood' => $this->project->neighborhood, 
+            'value' => $this->project->value
+        ]);
+
+        $this->closeModal();
+        $this->emitUp('updateStepList');
     }
 
-    public function openModal()
+    public function openLeadModal(ProjectService $service, $id = null)
     {
         $this->open = true;
+        if($id != null){
+            $this->project = $service->find($id);
+            $this->state_id = $this->project->state_id;
+            $this->updatedStateId();
+            $this->city_id = $this->project->city_id;
+        }else{
+            $this->project = new Project;
+        }
     }
 
     public function closeModal()

@@ -39,10 +39,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         return view('leads');
     })->name('leads');
 
-    Route::get('/products', function () {
-        return view('products');
-    })->name('products');
-
     Route::get('/providers', function () {
         return view('providers');
     })->name('providers');
@@ -50,6 +46,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/offers', function () {
         return view('offers');
     })->name('offers');
+
+    Route::get('/offers/{id}', function (Request $request) {
+        return view('offers-list', ['id' => $request->id]);
+    })->name('offers-list');
 
     Route::get('/users', function () {
         return view('users');

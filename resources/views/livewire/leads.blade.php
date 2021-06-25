@@ -6,7 +6,7 @@
             <div class="bg-gray-100 h-full p-2 border-b border-gray-200 shadow-sm sm:rounded-lg overflow-y-auto">
 
                 @foreach($step->projects as $project)
-                <div class="bg-white p-2 border-b border-gray-200 shadow-sm sm:rounded-lg cursor-pointer mb-2">
+                <div class="bg-white p-2 border-b border-gray-200 shadow-sm sm:rounded-lg cursor-pointer mb-2" wire:click="openModal({{$project->id}})">
                     <div class="font-bold text-sm">{{ $project->client->name }}</div>
                     <div class="text-xs">{{ $project->title }}</div>
                     <div class="flex justify-end mt-1">
@@ -14,11 +14,9 @@
                     </div>
                 </div>
                 @endforeach
-
             </div>
         </div>
         @endforeach
     </div>
-
     @livewire('components.lead-modal')
 </div>
