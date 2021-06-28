@@ -18,5 +18,5 @@
         </div>
         @endforeach
     </div>
-    @livewire('components.lead-modal')
+    @livewire('components.lead-modal', ['add' => true])
 </div>

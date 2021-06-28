@@ -31,4 +31,8 @@ class Project extends Model
     public function user(){
         return $this->hasOne(User::class, 'id', 'user_id');
     }
+    
+    public function step(){
+        return $this->hasOne(Step::class, 'id', 'step_id');
+    }
 }

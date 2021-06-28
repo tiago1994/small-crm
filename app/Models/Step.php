@@ -10,6 +10,6 @@ class Step extends Model
     use HasFactory;
 
     public function projects(){
-        return $this->hasMany(Project::class, 'step_id', 'id');
+        return $this->hasMany(Project::class, 'step_id', 'id')->orderBy('created_at', 'DESC');
     }
 }

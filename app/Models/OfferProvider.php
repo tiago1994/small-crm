@@ -19,4 +19,8 @@ class OfferProvider extends Model
     public function provider(){
         return $this->hasOne(Provider::class, 'id', 'provider_id');
     }
+    
+    public function offer(){
+        return $this->hasOne(Offer::class, 'id', 'offer_id');
+    }
 }

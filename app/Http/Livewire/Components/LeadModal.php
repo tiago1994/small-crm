@@ -16,6 +16,7 @@ class LeadModal extends Component
     public $users;
     public $clients;
     public $steps;
+    public $add = true;
 
     public $states = [];
     public $state_id = "";
@@ -39,12 +40,13 @@ class LeadModal extends Component
 
     protected $listeners = ['openLeadModal'];
 
-    public function mount(StateService $stateService, StepService $stepService, ClientService $clientService, UserService $userService)
+    public function mount(StateService $stateService, StepService $stepService, ClientService $clientService, UserService $userService, $add)
     {
         $this->users = $userService->getAll();
         $this->clients = $clientService->getAll();
         $this->steps = $stepService->getAll();
         $this->states = $stateService->getAll();
+        $this->add = $add;
     }
 
     public function render()
@@ -73,6 +75,7 @@ class LeadModal extends Component
 
         $this->closeModal();
         $this->emitUp('updateStepList');
+        $this->emitUp('updateProjectsList');
     }
 
     public function openLeadModal(ProjectService $service, $id = null)

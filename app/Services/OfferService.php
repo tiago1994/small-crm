@@ -20,7 +20,7 @@ class OfferService
 
     public function getAllPaginate()
     {
-        return $this->repository->getAll()->paginate(config('app.paginate_limit'));
+        return $this->repository->getAll()->orderBy('created_at', 'DESC')->paginate(config('app.paginate_limit'));
     }
 
     public function find($id)

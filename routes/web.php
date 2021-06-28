@@ -18,6 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/provider/offer/{code}', \App\Http\Livewire\ProviderOffer::class);
+
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
@@ -38,6 +40,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/leads', function () {
         return view('leads');
     })->name('leads');
+    
+    Route::get('/projects', function () {
+        return view('projects');
+    })->name('projects');
 
     Route::get('/providers', function () {
         return view('providers');

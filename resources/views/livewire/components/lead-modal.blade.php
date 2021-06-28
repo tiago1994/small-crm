@@ -1,9 +1,11 @@
 <div>
-    <div class="absolute right-5 bottom-5">
-        <div class="bg-white h-10 w-10 flex items-center justify-center shadow-xl rounded-full cursor-pointer" wire:click="openLeadModal()">
-            <i class="la la-plus"></i>
+    @if($add)
+        <div class="fixed right-5 bottom-5">
+            <div class="bg-white h-10 w-10 flex items-center justify-center shadow-xl rounded-full cursor-pointer" wire:click="openLeadModal()">
+                <i class="la la-plus"></i>
+            </div>
         </div>
-    </div>
+    @endif
     <div class="{{!$open?'hidden':''}}">
         <div class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
             <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center">
