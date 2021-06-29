@@ -37,7 +37,6 @@ class Vehicles extends Component
         $service->stop($id, now());
     }
 
-
     public function edit(VehicleService $service, $id)
     {
         $this->toggleAddModal();

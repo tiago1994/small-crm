@@ -3,8 +3,8 @@
 namespace App\Http\Livewire\Components;
 
 use App\Models\Offer;
-use App\Models\OfferProvider;
 use App\Services\OfferService;
+use App\Services\OfferProviderService;
 use App\Services\ProviderService;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -38,7 +38,7 @@ class OfferModal extends Component
         return view('livewire.components.offer-modal');
     }
 
-    public function save(OfferService $service)
+    public function save(OfferService $service, OfferProviderService $offerProviderService)
     {
         $this->validate();
         $file_name = time() . '.' . $this->file->getClientOriginalExtension();
@@ -49,11 +49,8 @@ class OfferModal extends Component
             'file' => $file_name
         ]);
 
-        collect($this->providers_selected)->map(function($provider) use ($new_offer){
-            OfferProvider::create([
-                'offer_id' => $new_offer->id,
-                'provider_id' => $provider['id']
-            ]);
+        collect($this->providers_selected)->map(function ($provider) use ($new_offer, $offerProviderService) {
+            $offerProviderService->save($new_offer->id, $provider['id']);
         });
 
         $this->closeModal();
@@ -81,13 +78,15 @@ class OfferModal extends Component
         }
     }
 
-    public function updatedProviderSelect(){
+    public function updatedProviderSelect()
+    {
         $search_id = $this->provider_select;
         $this->providers_selected[] = collect($this->providers)->firstWhere('id', $search_id);
         $this->provider_select = [];
     }
 
-    public function removeSelectedProvider($id){
+    public function removeSelectedProvider($id)
+    {
         $this->providers_selected = collect($this->providers_selected)->where('id', '!=', $id);
     }
 }

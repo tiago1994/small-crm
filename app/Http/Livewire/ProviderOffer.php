@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\OfferProvider;
+use App\Services\OfferProviderService;
 
 class ProviderOffer extends Component
 {
@@ -14,22 +15,20 @@ class ProviderOffer extends Component
         'offer_provider.value' => 'required'
     ];
 
-    public function mount($code){
+    public function mount(OfferProviderService $service, $code)
+    {
         $code_url = base64_decode($code);
-        if(!$code_url){
+        if (!$code_url) {
             return abort(404);
         }
 
         $json_decoded = json_decode($code_url, true);
 
-        if(!is_array($json_decoded) || !array_key_exists('offer_id', $json_decoded) || !array_key_exists('provider_id', $json_decoded)){
+        if (!is_array($json_decoded) || !array_key_exists('offer_id', $json_decoded) || !array_key_exists('provider_id', $json_decoded)) {
             return abort(404);
         }
 
-        $check_offer = OfferProvider::where([
-            'offer_id' => $json_decoded['offer_id'],
-            'provider_id' => $json_decoded['provider_id']
-        ])->firstOrFail();
+        $check_offer = $service->getOfferProvider($json_decoded['offer_id'], $json_decoded['provider_id']);
 
         $this->offer_provider = $check_offer;
         $this->offer_provider->value = number_format($this->offer_provider->value, 2, ',', '.');
@@ -42,8 +41,10 @@ class ProviderOffer extends Component
             ->section('slot');
     }
 
-    public function submit(){
+    public function submit()
+    {
         $this->validate();
+        $this->offer_provider->value = formatValue($this->offer_provider->value); 
         $this->offer_provider->save();
     }
 }

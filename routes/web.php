@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/provider/offer/{code}', \App\Http\Livewire\ProviderOffer::class);
+Route::get('/provider/offer/{code}', \App\Http\Livewire\ProviderOffer::class)->name('provider-offer');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', function () {

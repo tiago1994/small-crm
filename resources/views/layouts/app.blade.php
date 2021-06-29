@@ -43,5 +43,6 @@
         @stack('modals')
 
         @livewireScripts
+        <script src="{{ asset('js/simple-functions.js') }}"></script>
     </body>
 </html>

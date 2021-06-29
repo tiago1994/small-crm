@@ -90,7 +90,7 @@
                                         @error('project.title') <span class="text-red-500">{{ $message }}</span> @enderror
                                     </div>
                                     <div class="col-span-6 mt-3">
-                                        <input type="text" class="w-full border border-gray-200 rounded shadow-sm" placeholder="Digite o valor do projeto..." wire:model.defer="project.value" />
+                                        <input type="text" class="w-full border border-gray-200 rounded shadow-sm" placeholder="Digite o valor do projeto..." onKeyUp="moeda(this);" wire:model.defer="project.value" />
                                         @error('project.value') <span class="text-red-500">{{ $message }}</span> @enderror
                                     </div>
                                 </div>

@@ -14,7 +14,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
-    'paginate_limit' => env('PAGINATE_LIMIT', 25),
+    'paginate_limit' => env('PAGINATE_LIMIT', 15),
 
     /*
     |--------------------------------------------------------------------------

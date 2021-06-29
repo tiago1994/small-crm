@@ -70,7 +70,7 @@ class LeadModal extends Component
             'address' => $this->project->address, 
             'number' => $this->project->number, 
             'neighborhood' => $this->project->neighborhood, 
-            'value' => $this->project->value
+            'value' => formatValue($this->project->value)
         ]);
 
         $this->closeModal();
@@ -83,6 +83,7 @@ class LeadModal extends Component
         $this->open = true;
         if($id != null){
             $this->project = $service->find($id);
+            $this->project->value = number_format($this->project->value, 2, ',', '.');
             $this->state_id = $this->project->state_id;
             $this->updatedStateId();
             $this->city_id = $this->project->city_id;
