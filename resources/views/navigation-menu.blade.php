@@ -11,36 +11,48 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('leads') }}" :active="request()->routeIs('leads')">
-                        {{ __('Leads') }}
-                    </x-jet-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('projects') }}" :active="request()->routeIs('projects')">
-                        {{ __('Projetos') }}
-                    </x-jet-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('clients') }}" :active="request()->routeIs('clients')">
-                        {{ __('Clientes') }}
-                    </x-jet-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('offers') }}" :active="request()->routeIs('offers')">
-                        {{ __('Cotações') }}
-                    </x-jet-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('providers') }}" :active="request()->routeIs('providers')">
-                        {{ __('Fornecedores') }}
-                    </x-jet-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('vehicles') }}" :active="request()->routeIs('vehicles')">
-                        {{ __('Veículos') }}
-                    </x-jet-nav-link>
-                </div>
+                @can('leads')
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-jet-nav-link href="{{ route('leads') }}" :active="request()->routeIs('leads')">
+                            {{ __('Leads') }}
+                        </x-jet-nav-link>
+                    </div>
+                @endcan
+                @can('projects')
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-jet-nav-link href="{{ route('projects') }}" :active="request()->routeIs('projects')">
+                            {{ __('Projetos') }}
+                        </x-jet-nav-link>
+                    </div>
+                @endcan
+                @can('clients')
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-jet-nav-link href="{{ route('clients') }}" :active="request()->routeIs('clients')">
+                            {{ __('Clientes') }}
+                        </x-jet-nav-link>
+                    </div>
+                @endcan
+                @can('offers')
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-jet-nav-link href="{{ route('offers') }}" :active="request()->routeIs('offers')">
+                            {{ __('Cotações') }}
+                        </x-jet-nav-link>
+                    </div>
+                @endcan
+                @can('providers')
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-jet-nav-link href="{{ route('providers') }}" :active="request()->routeIs('providers')">
+                            {{ __('Fornecedores') }}
+                        </x-jet-nav-link>
+                    </div>
+                @endcan
+                @can('vehicles')
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-jet-nav-link href="{{ route('vehicles') }}" :active="request()->routeIs('vehicles')">
+                            {{ __('Veículos') }}
+                        </x-jet-nav-link>
+                    </div>
+                @endcan
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -119,9 +131,11 @@
                                 {{ __('Configurações') }}
                             </div>
 
-                            <x-jet-dropdown-link href="{{ route('users') }}">
-                                {{ __('Usuários') }}
-                            </x-jet-dropdown-link>
+                            @can('users')
+                                <x-jet-dropdown-link href="{{ route('users') }}">
+                                    {{ __('Usuários') }}
+                                </x-jet-dropdown-link>
+                            @endcan
                             
                             <!-- Account Management -->
                             <div class="block px-4 py-2 text-xs text-gray-400">
@@ -131,12 +145,6 @@
                             <x-jet-dropdown-link href="{{ route('profile.show') }}">
                                 {{ __('Perfil') }}
                             </x-jet-dropdown-link>
-
-                            @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                                <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
-                                    {{ __('API Tokens') }}
-                                </x-jet-dropdown-link>
-                            @endif
 
                             <div class="border-t border-gray-100"></div>
 
@@ -195,12 +203,6 @@
                 <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                     {{ __('Profile') }}
                 </x-jet-responsive-nav-link>
-
-                @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                    <x-jet-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
-                        {{ __('API Tokens') }}
-                    </x-jet-responsive-nav-link>
-                @endif
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">

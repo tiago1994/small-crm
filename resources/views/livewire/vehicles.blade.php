@@ -1,23 +1,28 @@
 <div>
     <div class="grid grid-cols-3 gap-4">
         @foreach ($vehicles as $loop => $vehicle)
-        <div class="col-span-1 p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
+        <div class="col-span-3 md:col-span-1 p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
             <div class="flex">
                 <div class="flex-1 flex">
                     @if($vehicle->history && $vehicle->history->stop == null)
                     <div wire:click="stopVehicle({{$vehicle->id}})"><i class="la la-pause text-xl cursor-pointer"></i></div>
                     @else
-                    <div wire:click="playVehicle({{$vehicle->id}})"><i class="la la-play text-xl cursor-pointer"></i></div>
+                    <div wire:click="play({{$vehicle->id}})"><i class="la la-play text-xl cursor-pointer"></i></div>
                     @endif
                 </div>
+                @role('Admin')
                 <div class="justify-end flex-1 flex">
                     <div><a href="{{route('vehicles-history', $vehicle->id)}}"><i class="la la-bars text-xl cursor-pointer"></i></a></div>
                     <div wire:key="{{ $loop->index }}" wire:click="edit({{$vehicle->id}})"><i class="la la-pencil text-xl cursor-pointer ml-1"></i></div>
                     <div wire:click="toggleDeleteModal({{$vehicle->id}})"><i class="la la-trash text-xl cursor-pointer ml-1"></i></div>
                 </div>
+                @endrole
             </div>
             <div class="text-2xl font-semibold mt-2">{{ $vehicle->name }}</div>
             <div class="text-md font-semibold text-gray-400">{{ $vehicle->code }}</div>
+            @if($vehicle->history && $vehicle->history->stop == null)
+            <div class="text-md font-semibold text-gray-400">{{ $vehicle->history->user->name }}</div>
+            @endif
         </div>
         @endforeach
 
@@ -57,11 +62,53 @@
         </div>
         @endif
 
+        @if($modalConfirm)
+        <div class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+            <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+                <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+                <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                    <div class="bg-white px-5 pt-5 pb-4">
+                        <div>
+                            <div class="mt-3 text-center sm:text-left">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Utilizar Veículo</h3>
+                                <hr class="mt-2">
+                                <div class="w-full mt-3">
+                                    <select class="w-full border border-gray-200 rounded shadow-sm" wire:model="user_selected">
+                                        <option>Selecionar usuário...</option>
+                                        @foreach($users as $user)
+                                            <option value="{{$user->id}}">{{$user->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('user_selected') <span class="text-red-500">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="w-full mt-3">
+                                    <input type="password" class="w-full border border-gray-200 rounded shadow-sm" wire:model.defer="password" placeholder="Digite a sua senha..." />
+                                    @error('password') <span class="text-red-500">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                        <button type="button" wire:click="checkPassword()" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
+                            Utilizar
+                        </button>
+                        <button type="button" wire:click="toggleUseVehicle()" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
+
+        @role('Admin')
         <div class="fixed right-5 bottom-5">
             <div class="bg-white h-10 w-10 flex items-center justify-center shadow-xl rounded-full cursor-pointer" wire:click="toggleAddModal()">
                 <i class="la la-plus"></i>
             </div>
         </div>
+        @endrole
         @if($openModal)
         <div class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
             <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">

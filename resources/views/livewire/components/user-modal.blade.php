@@ -10,12 +10,25 @@
                             <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Criar/Editar Usuário</h3>
                             <hr class="mt-2">
                             <div class="w-full mt-3">
-                                <input type="text" class="w-full border border-gray-200 rounded shadow-sm" wire:model.defer="user.name" placeholder="Digite o nome..." />
+                                <input type="text" class="w-full border border-gray-200 rounded shadow-sm" wire:model.defer="user.name" placeholder="Digite o nome..." required />
                                 @error('user.name') <span class="text-red-500">{{ $message }}</span> @enderror
                             </div>
                             <div class="w-full mt-3">
-                                <input type="email" class="w-full border border-gray-200 rounded shadow-sm" wire:model.defer="user.email" placeholder="Digite o email..." />
+                                <input type="email" class="w-full border border-gray-200 rounded shadow-sm" wire:model.defer="user.email" placeholder="Digite o email..." required />
                                 @error('user.email') <span class="text-red-500">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="w-full mt-3">
+                                <select class="w-full border border-gray-200 rounded shadow-sm" wire:model="role_selected" required>
+                                    <option>Selecionar...</option>
+                                    @foreach($roles as $role)
+                                        <option value="{{$role->id}}">{{$role->name}}</option>
+                                    @endforeach
+                                </select>
+                                @error('role_selected') <span class="text-red-500">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="w-full mt-3">
+                                <input type="password" class="w-full border border-gray-200 rounded shadow-sm" wire:model.defer="user_password" placeholder="Digite a senha..." />
+                                @error('user_password') <span class="text-red-500">{{ $message }}</span> @enderror
                             </div>
                         </div>
                     </div>

@@ -33,13 +33,13 @@ class JetstreamServiceProvider extends ServiceProvider
     {
         $this->configurePermissions();
 
-        Jetstream::createTeamsUsing(CreateTeam::class);
-        Jetstream::updateTeamNamesUsing(UpdateTeamName::class);
-        Jetstream::addTeamMembersUsing(AddTeamMember::class);
-        Jetstream::inviteTeamMembersUsing(InviteTeamMember::class);
-        Jetstream::removeTeamMembersUsing(RemoveTeamMember::class);
-        Jetstream::deleteTeamsUsing(DeleteTeam::class);
-        Jetstream::deleteUsersUsing(DeleteUser::class);
+        // Jetstream::createTeamsUsing(CreateTeam::class);
+        // Jetstream::updateTeamNamesUsing(UpdateTeamName::class);
+        // Jetstream::addTeamMembersUsing(AddTeamMember::class);
+        // Jetstream::inviteTeamMembersUsing(InviteTeamMember::class);
+        // Jetstream::removeTeamMembersUsing(RemoveTeamMember::class);
+        // Jetstream::deleteTeamsUsing(DeleteTeam::class);
+        // Jetstream::deleteUsersUsing(DeleteUser::class);
     }
 
     /**
@@ -52,28 +52,32 @@ class JetstreamServiceProvider extends ServiceProvider
         Jetstream::defaultApiTokenPermissions(['read']);
 
         Jetstream::role('admin', __('Admin'), [
-            'create',
-            'read',
-            'update',
-            'delete',
+            'leads',
+            'projects',
+            'clients',
+            'offers',
+            'providers',
+            'vehicles',
+            'users',
         ])->description(__('Administrador tem acesso a todas as funcionalidades do sistema.'));
 
         Jetstream::role('instalador', __('Instalador'), [
-            'read',
-            'create',
-            'update',
+            'vehicles',
         ])->description(__('Instalador tem acesso somente a gestão de frota de veículos.'));
         
         Jetstream::role('recepcao', __('Recepção'), [
-            'read',
-            'create',
-            'update',
-        ])->description(__('Recepção tem acesso somente a gestão de leads.'));
+            'leads',
+            'clients',
+        ])->description(__('Recepção tem acesso somente a leads e clientes.'));
         
-        Jetstream::role('vendedor', __('Vendedor'), [
-            'read',
-            'create',
-            'update',
-        ])->description(__('Vendedor tem acesso somente a gestão de leads.'));
+        Jetstream::role('comercial', __('Comercial'), [
+            'leads',
+            'clients',
+        ])->description(__('Comercial tem acesso somente a leads e clientes.'));
+        
+        Jetstream::role('compras', __('Compras'), [
+            'offers',
+            'providers',
+        ])->description(__('Compras tem acesso somente a cotações e fornecedores.'));
     }
 }

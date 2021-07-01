@@ -17,6 +17,7 @@ class CreateOfferProvidersTable extends Migration
             $table->id();
             $table->unsignedBigInteger('offer_id');
             $table->unsignedBigInteger('provider_id');
+            $table->string('file')->nullable();
             $table->text('description')->nullable();
             $table->float('value', 10, 2)->nullable();
             $table->timestamps();

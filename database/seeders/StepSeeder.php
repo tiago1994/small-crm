@@ -14,7 +14,7 @@ class StepSeeder extends Seeder
      */
     public function run()
     {
-        $steps = ['Lead', 'Primeiro Contato', 'Segundo Contato', 'Proposta', 'Sucesso', 'Falha'];
+        $steps = ['Lead', 'Proposta', 'Primeiro Contato', 'Segundo Contato', 'Sucesso', 'Falha'];
         $steps_visible = [true, true, true, true, false, false];
         foreach ($steps as $i => $step) {
             Step::create([

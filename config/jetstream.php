@@ -42,11 +42,11 @@ return [
     */
 
     'features' => [
-        // Features::termsAndPrivacyPolicy(),
         Features::profilePhotos(),
+        // Features::termsAndPrivacyPolicy(),
+        // Features::teams(['invitations' => false]),
         // Features::api(),
-        //Features::teams(['invitations' => true]),
-        //Features::accountDeletion(),
+        // Features::accountDeletion(),
     ],
 
     /*

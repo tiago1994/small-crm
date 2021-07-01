@@ -15,14 +15,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('dashboard');
 });
 
 Route::get('/provider/offer/{code}', \App\Http\Livewire\ProviderOffer::class)->name('provider-offer');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        if(auth()->user()->hasRole('Instalador')){
+            return redirect()->route('vehicles');
+        }elseif(auth()->user()->hasRole('Compras')){
+            return redirect()->route('offers');
+        }else{
+            return redirect()->route('leads');
+        }
     })->name('dashboard');
 
     Route::get('/vehicles', function () {
