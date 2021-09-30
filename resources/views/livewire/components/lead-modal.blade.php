@@ -95,6 +95,10 @@
                                     </div>
                                 </div>
                                 <div class="w-full mt-3">
+                                    <input type="file" class="w-full border border-gray-200 p-2 rounded shadow-sm" wire:model.defer="files" multiple />
+                                    @error('project.files') <span class="text-red-500">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="w-full mt-3">
                                     <textarea class="w-full border border-gray-200 rounded shadow-sm" placeholder="Digite os detalhes do projeto..." rows="4" wire:model.defer="project.description"></textarea>
                                     @error('project.description') <span class="text-red-500">{{ $message }}</span> @enderror
                                 </div>

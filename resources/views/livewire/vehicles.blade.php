@@ -1,7 +1,7 @@
 <div>
     <div class="grid grid-cols-3 gap-4">
         @foreach ($vehicles as $loop => $vehicle)
-        <div class="col-span-3 md:col-span-1 p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
+        <div class="col-span-3 md:col-span-1 p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg {{ $vehicle->history && $vehicle->history->stop == null?'bg-gray-50':'' }}">
             <div class="flex">
                 <div class="flex-1 flex">
                     @if($vehicle->history && $vehicle->history->stop == null)
@@ -77,7 +77,7 @@
                                     <select class="w-full border border-gray-200 rounded shadow-sm" wire:model="user_selected">
                                         <option>Selecionar usuário...</option>
                                         @foreach($users as $user)
-                                            <option value="{{$user->id}}">{{$user->name}}</option>
+                                        <option value="{{$user->id}}">{{$user->name}}</option>
                                         @endforeach
                                     </select>
                                     @error('user_selected') <span class="text-red-500">{{ $message }}</span> @enderror

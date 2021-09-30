@@ -9,8 +9,12 @@ use App\Services\UserService;
 use App\Services\ProjectService;
 use Livewire\Component;
 use App\Models\Project;
+use Livewire\WithFileUploads;
+
 class LeadModal extends Component
 {
+    use WithFileUploads;
+
     public $open = false;
     public Project $project;
     public $users;
@@ -19,6 +23,7 @@ class LeadModal extends Component
     public $add = true;
 
     public $states = [];
+    public $files = [];
     public $state_id = "";
     public $cities = [];
     public $city_id = "";
@@ -28,6 +33,7 @@ class LeadModal extends Component
         'project.client_id' => 'required',
         'city_id' => 'required',
         'state_id' => 'required',
+        'files' => 'sometimes',
         'project.step_id' => 'required',
         'project.title' => 'required',
         'project.description' => 'required',
@@ -72,6 +78,11 @@ class LeadModal extends Component
             'neighborhood' => $this->project->neighborhood, 
             'value' => formatValue($this->project->value)
         ]);
+
+        foreach($this->files as $file){
+            $file_name = time() . '.' . $file->getClientOriginalExtension();
+            $this->file->storeAs('public/leads', $file_name);
+        }
 
         $this->closeModal();
         $this->emitUp('updateStepList');

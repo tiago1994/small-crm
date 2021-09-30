@@ -35,4 +35,8 @@ class Project extends Model
     public function step(){
         return $this->hasOne(Step::class, 'id', 'step_id');
     }
+    
+    public function files(){
+        return $this->hasMany(ProjectImage::class, 'project_id', 'id');
+    }
 }
