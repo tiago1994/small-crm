@@ -5,17 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Offer extends Model
+class FindUs extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'title',
-        'file', 
-        'description'
-    ];
+    protected $table = 'find_us';
+    public $timestamps = false;
 
-    public function offers(){
-        return $this->hasMany(OfferProvider::class);
-    }
+    protected $fillable = [
+        'name'
+    ];
 }

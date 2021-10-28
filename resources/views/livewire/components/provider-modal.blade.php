@@ -10,18 +10,22 @@
                             <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Criar/Editar Fornecedor</h3>
                             <hr class="mt-2">
                             <div class="w-full mt-3">
+                                <label class="font-bold text-sm">Empresa <span class="text-red-600">*</span></label>
                                 <input type="text" class="w-full border border-gray-200 rounded shadow-sm" wire:model.defer="provider.company" placeholder="Digite a empresa..." />
                                 @error('provider.company') <span class="text-red-500">{{ $message }}</span> @enderror
                             </div>
                             <div class="w-full mt-3">
+                                <label class="font-bold text-sm">Nome Contato <span class="text-red-600">*</span></label>
                                 <input type="text" class="w-full border border-gray-200 rounded shadow-sm" wire:model.defer="provider.name" placeholder="Digite o nome..." />
                                 @error('provider.name') <span class="text-red-500">{{ $message }}</span> @enderror
                             </div>
                             <div class="w-full mt-3">
+                                <label class="font-bold text-sm">Email Contato <span class="text-red-600">*</span></label>
                                 <input type="email" class="w-full border border-gray-200 rounded shadow-sm" wire:model.defer="provider.email" placeholder="Digite o email..." />
                                 @error('provider.email') <span class="text-red-500">{{ $message }}</span> @enderror
                             </div>
                             <div class="w-full mt-3">
+                                <label class="font-bold text-sm">Telefone Contato <span class="text-red-600">*</span></label>
                                 <input type="text" class="w-full border border-gray-200 rounded shadow-sm" wire:model.defer="provider.phone" placeholder="Digite o telefone..." />
                                 @error('provider.phone') <span class="text-red-500">{{ $message }}</span> @enderror
                             </div>

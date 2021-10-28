@@ -22,6 +22,7 @@ class OfferModal extends Component
 
     protected $rules = [
         'offer.title' => 'required',
+        'offer.description' => 'required',
         'file' => 'required',
         'providers_selected' => 'required',
     ];
@@ -46,6 +47,7 @@ class OfferModal extends Component
         $new_offer = $service->save([
             'id' => $this->offer->id,
             'title' => $this->offer->title,
+            'description' => $this->offer->description,
             'file' => $file_name
         ]);
 

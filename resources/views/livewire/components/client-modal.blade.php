@@ -10,22 +10,27 @@
                             <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Criar/Editar Cliente</h3>
                             <hr class="mt-2">
                             <div class="w-full mt-3">
+                                <label class="font-bold text-sm">Nome <span class="text-red-600">*</span></label>
                                 <input type="text" class="w-full border border-gray-200 rounded shadow-sm" wire:model.defer="client.name" placeholder="Digite o nome do cliente..." />
                                 @error('client.name') <span class="text-red-500">{{ $message }}</span> @enderror
                             </div>
                             <div class="w-full mt-3">
+                                <label class="font-bold text-sm">Email <span class="text-red-600">*</span></label>
                                 <input type="email" class="w-full border border-gray-200 rounded shadow-sm" wire:model.defer="client.email" placeholder="Digite o email do cliente..." />
                                 @error('client.email') <span class="text-red-500">{{ $message }}</span> @enderror
                             </div>
                             <div class="w-full mt-3">
+                                <label class="font-bold text-sm">CPF</label>
                                 <input type="text" class="w-full border border-gray-200 rounded shadow-sm" wire:model.defer="client.cpf" placeholder="Digite o cpf do cliente..." />
                                 @error('client.cpf') <span class="text-red-500">{{ $message }}</span> @enderror
                             </div>
                             <div class="w-full mt-3">
+                                <label class="font-bold text-sm">Telefone</label>
                                 <input type="text" class="w-full border border-gray-200 rounded shadow-sm" wire:model.defer="client.phone" placeholder="Digite o telefone do cliente..." />
                                 @error('client.phone') <span class="text-red-500">{{ $message }}</span> @enderror
                             </div>
                             <div class="w-full mt-3">
+                                <label class="font-bold text-sm">Whatsapp</label>
                                 <input type="text" class="w-full border border-gray-200 rounded shadow-sm" wire:model.defer="client.whatsapp" placeholder="Digite o whatsapp do cliente..." />
                                 @error('client.whatsapp') <span class="text-red-500">{{ $message }}</span> @enderror
                             </div>

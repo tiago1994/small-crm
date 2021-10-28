@@ -21,7 +21,7 @@
             <div class="text-2xl font-semibold mt-2">{{ $vehicle->name }}</div>
             <div class="text-md font-semibold text-gray-400">{{ $vehicle->code }}</div>
             @if($vehicle->history && $vehicle->history->stop == null)
-            <div class="text-md font-semibold text-gray-400">{{ $vehicle->history->user->name }}</div>
+                <div class="text-md font-semibold text-gray-400">{{ $vehicle->history->user->name }}</div>
             @endif
         </div>
         @endforeach
@@ -74,6 +74,7 @@
                                 <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Utilizar Veículo</h3>
                                 <hr class="mt-2">
                                 <div class="w-full mt-3">
+                                    <label class="font-bold text-sm">Usuário <span class="text-red-600">*</span></label>
                                     <select class="w-full border border-gray-200 rounded shadow-sm" wire:model="user_selected">
                                         <option>Selecionar usuário...</option>
                                         @foreach($users as $user)
@@ -83,6 +84,7 @@
                                     @error('user_selected') <span class="text-red-500">{{ $message }}</span> @enderror
                                 </div>
                                 <div class="w-full mt-3">
+                                    <label class="font-bold text-sm">Senha <span class="text-red-600">*</span></label>
                                     <input type="password" class="w-full border border-gray-200 rounded shadow-sm" wire:model.defer="password" placeholder="Digite a sua senha..." />
                                     @error('password') <span class="text-red-500">{{ $message }}</span> @enderror
                                 </div>
@@ -121,10 +123,12 @@
                                 <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Criar/Editar Veículo</h3>
                                 <hr class="mt-2">
                                 <div class="w-full mt-3">
+                                    <label class="font-bold text-sm">Nome do veículo <span class="text-red-600">*</span></label>
                                     <input type="text" class="w-full border border-gray-200 rounded shadow-sm" wire:model.defer="vehicle.name" placeholder="Digite o nome do veículo..." />
                                     @error('vehicle.name') <span class="text-red-500">{{ $message }}</span> @enderror
                                 </div>
                                 <div class="w-full mt-3">
+                                    <label class="font-bold text-sm">Placa do veículo <span class="text-red-600">*</span></label>
                                     <input type="text" class="w-full border border-gray-200 rounded shadow-sm" wire:model.defer="vehicle.code" placeholder="Digite a placa do veículo..." />
                                     @error('vehicle.code') <span class="text-red-500">{{ $message }}</span> @enderror
                                 </div>

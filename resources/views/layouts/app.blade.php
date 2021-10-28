@@ -12,12 +12,12 @@
         <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
         
         <!-- Styles -->
-        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset(mix('css/app.css')) }}">
 
         @livewireStyles
 
         <!-- Scripts -->
-        <script src="{{ mix('js/app.js') }}" defer></script>
+        <script src="{{ asset(mix('js/app.js')) }}" defer></script>
     </head>
     <body class="font-sans antialiased">
         <x-jet-banner />

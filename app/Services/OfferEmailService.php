@@ -2,6 +2,7 @@
 
 namespace App\Services;
 use App\Mail\OfferProvider;
+use App\Models\Offer;
 
 class OfferEmailService
 {
@@ -12,7 +13,8 @@ class OfferEmailService
                 'provider_id' => $provider_id
             ])
         );
+        $offer = Offer::find($offer_id);
 
-        return \Mail::to('tiagovmatos@gmail.com')->send(new OfferProvider($base_64));
+        return \Mail::to('tiagovmatos@gmail.com')->send(new OfferProvider($base_64, $offer->description));
     }
 }

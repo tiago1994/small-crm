@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Components;
 
+use App\Models\FindUs;
 use App\Services\StateService;
 use App\Services\StepService;
 use App\Services\ClientService;
@@ -9,6 +10,7 @@ use App\Services\UserService;
 use App\Services\ProjectService;
 use Livewire\Component;
 use App\Models\Project;
+use App\Models\ProjectImage;
 use Livewire\WithFileUploads;
 
 class LeadModal extends Component
@@ -19,6 +21,7 @@ class LeadModal extends Component
     public Project $project;
     public $users;
     public $clients;
+    public $find_us;
     public $steps;
     public $add = true;
 
@@ -33,6 +36,7 @@ class LeadModal extends Component
         'project.client_id' => 'required',
         'city_id' => 'required',
         'state_id' => 'required',
+        'find_us_id' => 'required',
         'files' => 'sometimes',
         'project.step_id' => 'required',
         'project.title' => 'required',
@@ -41,7 +45,13 @@ class LeadModal extends Component
         'project.address' => 'required',
         'project.number' => 'required',
         'project.neighborhood' => 'required',
-        'project.value' => 'sometimes'
+        'project.value' => 'sometimes',
+        'project.comment_1' => 'sometimes',
+        'project.comment_2' => 'sometimes',
+        'project.comment_3' => 'sometimes',
+        'project.comment_4' => 'sometimes',
+        'project.comment_5' => 'sometimes',
+        'project.comment_6' => 'sometimes',
     ];
 
     protected $listeners = ['openLeadModal'];
@@ -52,6 +62,7 @@ class LeadModal extends Component
         $this->clients = $clientService->getAll();
         $this->steps = $stepService->getAll();
         $this->states = $stateService->getAll();
+        $this->find_us = FindUs::all();
         $this->add = $add;
     }
 
@@ -63,7 +74,7 @@ class LeadModal extends Component
     public function save(ProjectService $service)
     {
         $this->validate();
-        $service->save([
+        $response = $service->save([
             'id' => $this->project->id,
             'user_id' => $this->project->user_id, 
             'client_id' => $this->project->client_id, 
@@ -81,7 +92,11 @@ class LeadModal extends Component
 
         foreach($this->files as $file){
             $file_name = time() . '.' . $file->getClientOriginalExtension();
-            $this->file->storeAs('public/leads', $file_name);
+            $file->storeAs('public/leads', $file_name);
+            ProjectImage::create([
+                'project_id' => $response->id,
+                'file' => $file_name
+            ]);
         }
 
         $this->closeModal();
@@ -117,5 +132,9 @@ class LeadModal extends Component
         }
 
         $this->cities = $this->states->firstWhere('id', $this->state_id)['cities'];
+    }
+
+    public function removeFile($file){
+        $this->project->files = $this->project->files->where('id', '!=', $file['id']);
     }
 }

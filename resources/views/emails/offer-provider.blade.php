@@ -14,7 +14,7 @@
                     <table class="content" align="center" cellpadding="0" cellspacing="0" border="0">
                         <tr>
                             <td align="center">
-                                Olá, você esta recebendo este email pois sua empresa foi solicitada para esta cotação.
+                                {{$description}}
                             </td>
                         </tr>
                         <tr>

@@ -10,14 +10,22 @@
                             <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Criar/Editar Cotação</h3>
                             <hr class="mt-2">
                             <div class="w-full mt-3">
+                                <label class="font-bold text-sm">Título <span class="text-red-600">*</span></label>
                                 <input type="text" class="w-full border border-gray-200 rounded shadow-sm" wire:model.defer="offer.title" placeholder="Digite o título..." />
                                 @error('offer.title') <span class="text-red-500">{{ $message }}</span> @enderror
                             </div>
                             <div class="w-full mt-3">
+                                <label class="font-bold text-sm">Arquivo <span class="text-red-600">*</span></label>
                                 <input type="file" class="w-full border border-gray-200 rounded p-2 shadow-sm" wire:model="file"/>
                                 @error('file') <span class="text-red-500">{{ $message }}</span> @enderror
                             </div>
                             <div class="w-full mt-3">
+                                <label class="font-bold text-sm">Descrição <span class="text-red-600">*</span></label>
+                                <textarea class="w-full border border-gray-200 rounded shadow-sm" placeholder="Digite a descrição..." rows="4" wire:model.defer="offer.description"></textarea>
+                                @error('offer.description') <span class="text-red-500">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="w-full mt-3">
+                                <label class="font-bold text-sm">Fornecedores <span class="text-red-600">*</span></label>
                                 <select class="w-full border border-gray-200 rounded shadow-sm" wire:model="provider_select">
                                     <option value="">Selecionar fornecedor...</option>
                                     @foreach($providers as $p)
