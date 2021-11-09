@@ -106,7 +106,7 @@
                                     </div>
                                     <div class="col-span-4 mt-3">
                                         <label class="font-bold text-sm">Como nos encontrou? <span class="text-red-600">*</span></label>
-                                        <select class="w-full border border-gray-200 rounded shadow-sm" wire:model="find_us_id">
+                                        <select class="w-full border border-gray-200 rounded shadow-sm" wire:model.defer="find_us_id">
                                             <option value="">Selecionar...</option>
                                             @foreach($find_us as $type)
                                                 <option value="{{ $type['id'] }}">{{ $type['name'] }}</option>    
@@ -124,7 +124,7 @@
                                             @foreach($project->files as $file)
                                                 <div class="relative">
                                                     <a href="{{asset('storage/leads/'.$file->file)}}" target="_blank">
-                                                        <i class="la la-file la-3x"></i>
+                                                        <i class="la la-file-download la-3x"></i>
                                                     </a>
                                                     <div class="w-5 h-5 bg-red-600 absolute top-0 right-0 flex items-center justify-center cursor-pointer" wire:click="removeFile({{$file}})"><i class="la la-trash text-white text-sm"></i></div>
                                                 </div>
@@ -138,11 +138,36 @@
                                         <textarea class="w-full border border-gray-200 rounded shadow-sm" placeholder="Digite os detalhes do projeto..." rows="4" wire:model.defer="project.description"></textarea>
                                         @error('project.description') <span class="text-red-500">{{ $message }}</span> @enderror
                                     </div>
-                                    <div class="col-span-6 mt-3">
-                                        <label class="font-bold text-sm">Comentários ({{$project->step->name??'Etapa selecionada'}})</label>
-                                        <textarea class="w-full border border-gray-200 rounded shadow-sm" placeholder="Digite os comentários do projeto..." rows="4" wire:model.defer="project.comment_{{$project->step_id??'1'}}"></textarea>
-                                        @error('project.description') <span class="text-red-500">{{ $message }}</span> @enderror
-                                    </div>
+                                    @if($add)
+                                        <div class="col-span-6 mt-3">
+                                            <label class="font-bold text-sm">Comentários ({{$project->step->name??'Etapa selecionada'}})</label>
+                                            <textarea class="w-full border border-gray-200 rounded shadow-sm" placeholder="Digite os comentários do projeto..." rows="4" wire:model.defer="project.comment_{{$project->step_id??'1'}}"></textarea>
+                                            @error('project.description') <span class="text-red-500">{{ $message }}</span> @enderror
+                                        </div>
+                                    @endif
+                                    
+                                    @if(!$add)
+                                        <div class="col-span-6 mt-3">
+                                            <label class="font-bold text-sm">Comentários (Lead)</label>
+                                            <textarea class="w-full border border-gray-200 rounded shadow-sm" placeholder="Digite os comentários do projeto..." rows="4" wire:model.defer="project.comment_1"></textarea>
+                                            @error('project.comment_1') <span class="text-red-500">{{ $message }}</span> @enderror
+                                        </div>
+                                        <div class="col-span-6 mt-3">
+                                            <label class="font-bold text-sm">Comentários (Proposta)</label>
+                                            <textarea class="w-full border border-gray-200 rounded shadow-sm" placeholder="Digite os comentários do projeto..." rows="4" wire:model.defer="project.comment_2"></textarea>
+                                            @error('project.comment_2') <span class="text-red-500">{{ $message }}</span> @enderror
+                                        </div>
+                                        <div class="col-span-6 mt-3">
+                                            <label class="font-bold text-sm">Comentários (Primeiro Contato)</label>
+                                            <textarea class="w-full border border-gray-200 rounded shadow-sm" placeholder="Digite os comentários do projeto..." rows="4" wire:model.defer="project.comment_3"></textarea>
+                                            @error('project.comment_3') <span class="text-red-500">{{ $message }}</span> @enderror
+                                        </div>
+                                        <div class="col-span-6 mt-3">
+                                            <label class="font-bold text-sm">Comentários (Segundo Contato)</label>
+                                            <textarea class="w-full border border-gray-200 rounded shadow-sm" placeholder="Digite os comentários do projeto..." rows="4" wire:model.defer="project.comment_4"></textarea>
+                                            @error('project.comment_4') <span class="text-red-500">{{ $message }}</span> @enderror
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>

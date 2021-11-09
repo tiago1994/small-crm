@@ -35,7 +35,8 @@ class OfferRepository
             ['id' => $request['id']],
             [
                 'title' => $request['title'],
-                'file' => $request['file']
+                'file' => $request['file'],
+                'description' => $request['description']
             ]
         );
     }

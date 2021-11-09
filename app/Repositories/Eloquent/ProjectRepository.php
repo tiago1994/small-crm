@@ -45,7 +45,14 @@ class ProjectRepository
                 'address' => $request['address'],
                 'number' => $request['number'],
                 'neighborhood' => $request['neighborhood'],
-                'value' => $request['value']
+                'value' => $request['value'],
+                'find_us_id' => $request['find_us_id'],
+                'comment_1' => $request['comment_1'],
+                'comment_2' => $request['comment_2'],
+                'comment_3' => $request['comment_3'],
+                'comment_4' => $request['comment_4'],
+                'comment_5' => $request['comment_5'],
+                'comment_6' => $request['comment_6']
             ]
         );
     }

@@ -21,7 +21,14 @@ class Project extends Model
         'address',
         'number',
         'neighborhood',
-        'value'
+        'value',
+        'find_us_id',
+        'comment_1',
+        'comment_2',
+        'comment_3',
+        'comment_4',
+        'comment_5',
+        'comment_6'
     ];
 
     public function client(){

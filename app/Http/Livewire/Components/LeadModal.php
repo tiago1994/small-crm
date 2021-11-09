@@ -30,6 +30,7 @@ class LeadModal extends Component
     public $state_id = "";
     public $cities = [];
     public $city_id = "";
+    public $find_us_id = "";
 
     protected $rules = [
         'project.user_id' => 'required',
@@ -87,7 +88,14 @@ class LeadModal extends Component
             'address' => $this->project->address, 
             'number' => $this->project->number, 
             'neighborhood' => $this->project->neighborhood, 
-            'value' => formatValue($this->project->value)
+            'value' => formatValue($this->project->value),
+            'find_us_id' => $this->find_us_id,
+            'comment_1' => $this->project->comment_1,
+            'comment_2' => $this->project->comment_2,
+            'comment_3' => $this->project->comment_3,
+            'comment_4' => $this->project->comment_4,
+            'comment_5' => $this->project->comment_5,
+            'comment_6' => $this->project->comment_6
         ]);
 
         foreach($this->files as $file){
@@ -106,6 +114,9 @@ class LeadModal extends Component
 
     public function openLeadModal(ProjectService $service, $id = null)
     {
+        $this->resetErrorBag();
+        $this->resetValidation();
+
         $this->open = true;
         if($id != null){
             $this->project = $service->find($id);
@@ -113,8 +124,12 @@ class LeadModal extends Component
             $this->state_id = $this->project->state_id;
             $this->updatedStateId();
             $this->city_id = $this->project->city_id;
+            $this->find_us_id = $this->project->find_us_id;
         }else{
             $this->project = new Project;
+            $this->state_id = "";
+            $this->city_id = "";
+            $this->find_us_id = "";
         }
     }
 
@@ -136,5 +151,6 @@ class LeadModal extends Component
 
     public function removeFile($file){
         $this->project->files = $this->project->files->where('id', '!=', $file['id']);
+        ProjectImage::find($file['id'])->delete();
     }
 }
