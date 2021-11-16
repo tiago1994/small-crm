@@ -21,7 +21,7 @@ class UserRepository
     public function save($request)
     {   
         if($request['password']){
-            $this->model->updateOrCreate(
+            $user = $this->model->updateOrCreate(
                 ['id' => $request['id']],
                 [
                     'name' => $request['name'], 
@@ -30,7 +30,7 @@ class UserRepository
                 ]
             );
         }else{
-            $this->model->updateOrCreate(
+            $user = $this->model->updateOrCreate(
                 ['id' => $request['id']],
                 [
                     'name' => $request['name'], 
@@ -39,7 +39,7 @@ class UserRepository
             );
         }
 
-        $this->model->syncRoles($request['role']);
+        $user->syncRoles($request['role']);
     }
 
     public function find($id)
